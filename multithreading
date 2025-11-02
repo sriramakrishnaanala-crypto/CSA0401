@@ -1,0 +1,28 @@
+Start
+
+// Step 1: Create two threads
+CREATE_THREAD(Thread1)
+CREATE_THREAD(Thread2)
+
+// Step 2: Define thread functions
+Thread1:
+    while (TRUE) do
+        PRINT "Thread 1 is running"
+        SLEEP(1000)      // simulate work
+    END WHILE
+
+Thread2:
+    while (TRUE) do
+        PRINT "Thread 2 is running"
+        SLEEP(1000)
+    END WHILE
+
+// Step 3: Start threads
+START(Thread1)
+START(Thread2)
+
+// Step 4: Wait for threads to complete (optional)
+JOIN(Thread1)
+JOIN(Thread2)
+
+End
