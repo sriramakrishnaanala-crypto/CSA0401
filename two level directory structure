@@ -1,0 +1,27 @@
+Start
+
+// Step 1: Initialize Master Directory
+Initialize masterDirectory[] as empty
+maxUsers = 10
+userCount = 0
+
+// Step 2: Define Structure for each user's directory
+For each user:
+    directory[user] = empty
+    fileCount[user] = 0
+
+// Step 3: Define operations
+
+Function createUser(userName):
+    If userName already exists in masterDirectory:
+        PRINT "User already exists!"
+        RETURN
+    EndIf
+
+    If userCount < maxUsers:
+        userCount = userCount + 1
+        masterDirectory[userCount] = userName
+        directory[userName] = []
+        PRINT "User", userName, "created successfully."
+    Else
+        PRINT "Mast
