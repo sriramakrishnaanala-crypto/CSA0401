@@ -1,0 +1,14 @@
+Start
+
+// Step 1: Initialize semaphores
+Semaphore mutex = 1          // for critical section
+Semaphore fork[5] = {1, 1, 1, 1, 1}  // one for each fork
+
+Process philosopher(i)       // i = 0 to 4
+{
+    while (TRUE) do
+    {
+        THINK()
+        
+        WAIT(mutex)              // enter critical section
+        WAIT(fork[i])
