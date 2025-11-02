@@ -1,0 +1,21 @@
+Start
+
+Input n                   // number of disk requests
+Input requestQueue[n]     // list of track requests
+Input head                // current position of disk head
+
+totalSeekTime = 0
+
+PRINT "Head Movement Order: ", head
+
+FOR i = 1 TO n DO
+    distance = ABS(requestQueue[i] - head)
+    totalSeekTime = totalSeekTime + distance
+    head = requestQueue[i]
+    PRINT " -> ", head
+END FOR
+
+averageSeekTime = totalSeekTime / n
+
+PRINT "\nTotal Seek Time = ", totalSeekTime
+P
