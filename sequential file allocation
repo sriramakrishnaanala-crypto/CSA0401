@@ -1,0 +1,33 @@
+Start
+
+Input totalBlocks
+Initialize memory[totalBlocks] = 0       // 0 = free, 1 = allocated
+
+Function allocateFile(fileName, startBlock, length):
+    // Step 1: Check if blocks are free
+    For i = startBlock TO (startBlock + length - 1):
+        If memory[i] == 1:
+            PRINT "Block", i, "already allocated. Cannot allocate file."
+            RETURN
+        EndIf
+    EndFor
+
+    // Step 2: Allocate the blocks
+    For i = startBlock TO (startBlock + length - 1):
+        memory[i] = 1
+    EndFor
+
+    PRINT "File", fileName, "allocated from block", startBlock, "to", startBlock + length - 1
+
+EndFunction
+
+
+// Step 3: Display memory status
+Function showMemory():
+    For i = 0 TO totalBlocks - 1:
+        PRINT "Block", i, ":", memory[i]
+    EndFor
+
+EndFunction
+
+End
