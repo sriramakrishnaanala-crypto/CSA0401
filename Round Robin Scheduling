@@ -1,0 +1,16 @@
+Start
+
+// Step 1: Input number of processes and time quantum
+Input n
+Input timeQuantum
+Declare arrays: processID[n], burstTime[n], remainingTime[n], waitingTime[n], turnaroundTime[n]
+
+// Step 2: Get burst time for each process
+FOR i = 1 TO n DO
+    processID[i] = i
+    Input burstTime[i]
+    remainingTime[i] = burstTime[i]
+    waitingTime[i] = 0
+END FOR
+
+time = 0
