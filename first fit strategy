@@ -1,0 +1,22 @@
+Start
+
+Input numberOfBlocks
+Input blockSize[numberOfBlocks]
+
+Input numberOfProcesses
+Input processSize[numberOfProcesses]
+
+// Initialize allocation array
+allocation[numberOfProcesses] = -1     // -1 means not allocated
+
+FOR i = 1 TO numberOfProcesses DO
+    FOR j = 1 TO numberOfBlocks DO
+        IF blockSize[j] >= processSize[i] THEN
+            allocation[i] = j                // Assign block j to process i
+            blockSize[j] = blockSize[j] - processSize[i]  // Reduce available space
+            BREAK                            // Stop searching (first fit)
+        END IF
+    END FOR
+END FOR
+
+// Dis
