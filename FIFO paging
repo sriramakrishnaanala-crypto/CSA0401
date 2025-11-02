@@ -1,0 +1,14 @@
+Start
+
+Input numberOfFrames
+Input numberOfPages
+Input pageReferenceString[numberOfPages]
+
+Initialize:
+    frames[numberOfFrames] = -1      // -1 means empty
+    pageFaults = 0
+    nextToReplace = 0                // index to track oldest page
+
+FOR i = 1 TO numberOfPages DO
+    page = pageReferenceString[i]
+    found = FALSE
