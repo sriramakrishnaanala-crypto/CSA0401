@@ -1,0 +1,22 @@
+Start
+
+Create a pipe → pipeFD[2]   // pipeFD[0] = read end, pipeFD[1] = write end
+
+childPID = CREATE_PROCESS()
+
+IF childPID < 0 THEN
+    PRINT "Error: Process creation failed"
+    EXIT
+ELSE IF childPID == 0 THEN
+    // Child Process
+    CLOSE(pipeFD[1])  // close write end
+    READ(pipeFD[0], message)
+    PRINT "Child received message: ", message
+    CLOSE(pipeFD[0])
+ELSE
+    // Parent Process
+    CLOSE(pipeFD[0])  // close read end
+    WRITE(pipeFD[1], "Hello from Parent!")
+    CLOSE(pipeFD[1])
+    WAIT(childPID)
+END IF
