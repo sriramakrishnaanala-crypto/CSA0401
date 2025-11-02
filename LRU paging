@@ -1,0 +1,66 @@
+Start
+
+Input numberOfFrames
+Input numberOfPages
+Input pageReferenceString[numberOfPages]
+
+Initialize:
+    frames[numberOfFrames] = -1          // empty frames
+    lastUsed[numberOfFrames] = 0         // to track usage time
+    pageFaults = 0
+    time = 0
+
+FOR i = 1 TO numberOfPages DO
+    page = pageReferenceString[i]
+    found = FALSE
+    time = time + 1                      // increment time counter
+
+    // Step 1: Check if page already in memory
+    FOR j = 1 TO numberOfFrames DO
+        IF frames[j] == page THEN
+            found = TRUE
+            lastUsed[j] = time           // update last used time
+            BREAK
+        END IF
+    END FOR
+
+    // Step 2: If page not found → Page Fault
+    IF found == FALSE THEN
+        emptyFrameFound = FALSE
+
+        // Step 2a: Find an empty frame
+        FOR j = 1 TO numberOfFrames DO
+            IF frames[j] == -1 THEN
+                frames[j] = page
+                lastUsed[j] = time
+                emptyFrameFound = TRUE
+                BREAK
+            END IF
+        END FOR
+
+        // Step 2b: If no empty frame → replace least recently used
+        IF emptyFrameFound == FALSE THEN
+            lruIndex = 1
+            minTime = lastUsed[1]
+
+            FOR j = 2 TO numberOfFrames DO
+                IF lastUsed[j] < minTime THEN
+                    minTime = lastUsed[j]
+                    lruIndex = j
+                END IF
+            END FOR
+
+            frames[lruIndex] = page
+            lastUsed[lruIndex] = time
+        END IF
+
+        pageFaults = pageFaults + 1
+    END IF
+
+    // Step 3: Display current frame state
+    PRINT "Frames: ", frames
+END FOR
+
+PRINT "Total Page Faults = ", pageFaults
+
+End
