@@ -1,0 +1,21 @@
+Start
+
+// Step 1: Declare variables
+Declare sourceFile, destinationFile
+Declare dataBuffer
+
+// Step 2: Open source file in read mode
+sourceFile = OPEN("input.txt", "read")
+
+IF sourceFile == NULL THEN
+    PRINT "Error: Source file not found!"
+    EXIT
+END IF
+
+// Step 3: Open destination file in write mode
+destinationFile = OPEN("output.txt", "write")
+
+IF destinationFile == NULL THEN
+    PRINT "Error: Cannot create destination file!"
+    CLOSE(sourceFile)
+    EXIT
