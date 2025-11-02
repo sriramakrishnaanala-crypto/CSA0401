@@ -1,0 +1,51 @@
+Start
+
+Input n                        // number of disk requests
+Input requestQueue[n]          // list of track requests
+Input head                     // current head position
+Input diskSize                 // total number of tracks (e.g., 200)
+Input direction                // "left" or "right"
+
+Sort requestQueue in ascending order
+
+Find position of head in sorted list (pos)
+
+totalSeekTime = 0
+movementOrder = []
+
+IF direction == "left" THEN
+    // Move toward 0 first
+    FOR i = pos DOWNTO 1 DO
+        movementOrder.APPEND(requestQueue[i])
+    END FOR
+    movementOrder.APPEND(0)
+    // Then move to the right side
+    FOR i = pos+1 TO n DO
+        movementOrder.APPEND(requestQueue[i])
+    END FOR
+
+ELSE IF direction == "right" THEN
+    // Move toward end of disk first
+    FOR i = pos TO n DO
+        movementOrder.APPEND(requestQueue[i])
+    END FOR
+    movementOrder.APPEND(diskSize - 1)
+    // Then reverse direction
+    FOR i = pos-1 DOWNTO 1 DO
+        movementOrder.APPEND(requestQueue[i])
+    END FOR
+END IF
+
+// Calculate total seek time
+current = head
+FOR each track IN movementOrder DO
+    distance = ABS(track - current)
+    totalSeekTime = totalSeekTime + distance
+    current = track
+END FOR
+
+PRINT "Head Movement Order: ", head, "->", movementOrder
+PRINT "Total Seek Time = ", totalSeekTime
+PRINT "Average Seek Time = ", totalSeekTime / n
+
+End
