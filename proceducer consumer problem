@@ -1,0 +1,16 @@
+Start
+
+// Step 1: Initialize semaphores and variables
+Semaphore mutex = 1          // For critical section (mutual exclusion)
+Semaphore empty = n          // n = buffer size (number of empty slots)
+Semaphore full = 0           // Number of filled slots
+Buffer[1..n]
+
+// Step 2: Producer process
+Process Producer()
+{
+    while (TRUE) do
+    {
+        item = PRODUCE_ITEM()          // create a new item
+
+        WAIT(empty)
