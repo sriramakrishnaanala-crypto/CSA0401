@@ -1,0 +1,65 @@
+Start
+
+// Step 1: Initialize directory
+Initialize directory[] as empty
+maxFiles = 100
+fileCount = 0
+
+// Step 2: Define operations
+
+Function createFile(fileName):
+    For i = 1 to fileCount:
+        If directory[i] == fileName:
+            PRINT "Error: File name already exists!"
+            RETURN
+    EndFor
+
+    If fileCount < maxFiles:
+        fileCount = fileCount + 1
+        directory[fileCount] = fileName
+        PRINT "File", fileName, "created successfully."
+    Else
+        PRINT "Directory full!"
+    EndIf
+EndFunction
+
+
+Function deleteFile(fileName):
+    found = False
+    For i = 1 to fileCount:
+        If directory[i] == fileName:
+            directory[i] = directory[fileCount]  // replace with last file
+            fileCount = fileCount - 1
+            found = True
+            PRINT "File", fileName, "deleted."
+            BREAK
+        EndIf
+    EndFor
+
+    If found == False:
+        PRINT "File not found!"
+EndFunction
+
+
+Function searchFile(fileName):
+    For i = 1 to fileCount:
+        If directory[i] == fileName:
+            PRINT "File", fileName, "found at position", i
+            RETURN
+    EndFor
+    PRINT "File not found!"
+EndFunction
+
+
+Function listFiles():
+    If fileCount == 0:
+        PRINT "Directory is empty."
+    Else
+        PRINT "Files in directory:"
+        For i = 1 to fileCount:
+            PRINT directory[i]
+        EndFor
+    EndIf
+EndFunction
+
+End
