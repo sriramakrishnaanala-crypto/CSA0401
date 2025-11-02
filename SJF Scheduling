@@ -1,0 +1,15 @@
+Start
+
+// Step 1: Input number of processes
+Input n
+Declare arrays: processID[n], burstTime[n], waitingTime[n], turnaroundTime[n]
+
+// Step 2: Get burst time for each process
+FOR i = 1 TO n DO
+    processID[i] = i
+    Input burstTime[i]
+END FOR
+
+// Step 3: Sort processes by burst time (ascending order)
+FOR i = 1 TO n-1 DO
+    FOR j = i+1 TO n DO
