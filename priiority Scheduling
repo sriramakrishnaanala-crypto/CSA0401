@@ -1,0 +1,54 @@
+Start
+
+// Step 1: Input number of processes
+Input n
+Declare arrays: processID[n], burstTime[n], priority[n], waitingTime[n], turnaroundTime[n]
+
+// Step 2: Input burst time and priority for each process
+FOR i = 1 TO n DO
+    processID[i] = i
+    Input burstTime[i]
+    Input priority[i]
+END FOR
+
+// Step 3: Sort processes by priority (lower number = higher priority)
+FOR i = 1 TO n-1 DO
+    FOR j = i+1 TO n DO
+        IF priority[i] > priority[j] THEN
+            SWAP(priority[i], priority[j])
+            SWAP(burstTime[i], burstTime[j])
+            SWAP(processID[i], processID[j])
+        END IF
+    END FOR
+END FOR
+
+// Step 4: Calculate waiting time
+waitingTime[1] = 0
+FOR i = 2 TO n DO
+    waitingTime[i] = waitingTime[i-1] + burstTime[i-1]
+END FOR
+
+// Step 5: Calculate turnaround time
+FOR i = 1 TO n DO
+    turnaroundTime[i] = waitingTime[i] + burstTime[i]
+END FOR
+
+// Step 6: Calculate average waiting and turnaround time
+sumWT = 0
+sumTAT = 0
+FOR i = 1 TO n DO
+    sumWT = sumWT + waitingTime[i]
+    sumTAT = sumTAT + turnaroundTime[i]
+END FOR
+
+avgWT = sumWT / n
+avgTAT = sumTAT / n
+
+// Step 7: Display results
+PRINT "Process | Burst Time | Priority | Waiting Time | Turnaround Time"
+FOR i = 1 TO n DO
+    PRINT processID[i], burstTime[i], priority[i], waitingTime[i], turnaroundTime[i]
+END FOR
+
+PRINT "Average Waiting Time = ", avgWT
+PRINT "A
