@@ -1,0 +1,27 @@
+Start
+
+// Step 1: Parent process starts execution
+PRINT "Parent process started"
+
+// Step 2: Request OS to create a new child process
+childPID = CREATE_PROCESS()
+
+IF childPID < 0 THEN
+    PRINT "Error: Process creation failed"
+    EXIT
+ELSE IF childPID == 0 THEN
+    // Step 3: Code executed by the child process
+    PRINT "Child process running"
+    EXECUTE("child_program")
+    EXIT
+ELSE
+    // Step 4: Code executed by the parent process
+    PRINT "Parent process waiting for child to finish"
+    WAIT(childPID)
+    PRINT "Child process finished"
+END IF
+
+PRINT "Parent process completed"
+
+End
+
