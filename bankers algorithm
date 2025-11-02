@@ -1,0 +1,31 @@
+Start
+
+Input n, m  // number of processes and resources
+
+Input Available[m]
+Input Max[n][m]
+Input Allocation[n][m]
+
+// Step 1: Calculate Need matrix
+FOR i = 1 TO n DO
+    FOR j = 1 TO m DO
+        Need[i][j] = Max[i][j] - Allocation[i][j]
+    END FOR
+END FOR
+
+// Step 2: Initialize
+Finish[i] = false for all i
+Work[m] = Available[m]
+SafeSequence = empty list
+
+// Step 3: Find a process that can safely execute
+count = 0
+WHILE count < n DO
+    found = false
+    FOR i = 1 TO n DO
+        IF Finish[i] == false THEN
+            canExecute = true
+            FOR j = 1 TO m DO
+                IF Need[i][j] > Work[j] THEN
+                    canExecute = false
+                    BREAK
