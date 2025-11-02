@@ -1,0 +1,29 @@
+Start
+
+Input numberOfFrames
+Input numberOfPages
+Input pageReferenceString[numberOfPages]
+
+Initialize:
+    frames[numberOfFrames] = -1
+    pageFaults = 0
+
+FOR i = 1 TO numberOfPages DO
+    page = pageReferenceString[i]
+    found = FALSE
+
+    // Step 1: Check if page already in memory
+    FOR j = 1 TO numberOfFrames DO
+        IF frames[j] == page THEN
+            found = TRUE
+            BREAK
+        END IF
+    END FOR
+
+    // Step 2: If page not found → Page Fault
+    IF found == FALSE THEN
+        // Step 2a: If empty frame available
+        emptyFound = FALSE
+        FOR j = 1 TO numberOfFrames DO
+            IF frames[j] == -1 THEN
+                frames[j] = page
